@@ -1,21 +1,19 @@
-"""Project_webservice URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path
+from project.views import ProjectCreateViewSet
+from project.views import ProjectRetrieveUpdateDeleteViewSet
+from project.views import ProjectListViewSet
+from project.views import RequestTestAPI
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("api/v1/projects/create", ProjectCreateViewSet.as_view(), name="project_create"),
+    
+    path("api/v1/projects/<int:pk>/retrieve", ProjectRetrieveUpdateDeleteViewSet.as_view(), name="project_retrieve"),
+
+    path("api/v1/projects/<int:pk>/update", ProjectRetrieveUpdateDeleteViewSet.as_view(), name="project_update"),
+
+    path("api/v1/projects/<int:pk>/delete", ProjectRetrieveUpdateDeleteViewSet.as_view(), name="project_delete"),
+
+    path("api/v1/projects/list", ProjectListViewSet.as_view(), name="project_list"),
+
+    path("api/v1/request/", RequestTestAPI.as_view(), name="project_test"),
 ]
